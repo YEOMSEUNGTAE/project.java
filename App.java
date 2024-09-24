@@ -1,10 +1,12 @@
-
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class test1 extends JFrame {
-    // 테이블에 들어갈 데이터와 열 제목 배열
+class MyFrame extends JFrame{ 
     String[][] data;
     String[] title = {"년도", "학년/학기", "이수구분", "영역", "강의명",
                       "교수명", "학점", "성적", "여부", "합계"};
@@ -14,15 +16,16 @@ public class test1 extends JFrame {
     JTextField[] inputFields;
     JButton addButton;
 
-    public test1() {
-        // 데이터 배열 크기를 설정 (예: 3행 10열)
+    public MyFrame(){
+        this.setTitle("교과과정 이수관리 프로그램");  
+        this.setSize(500,400);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
+        
+        createMenu();
+        this.setVisible(true);
+        
         data = new String[3][10];
 
-        // GUI 설정
-        setTitle("교과과정 이수관리 프로그램");
-        setSize(800, 400);
-        setLayout(new BorderLayout());
-        
         // 입력 필드를 위한 패널 생성
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(2, 10));
@@ -74,8 +77,30 @@ public class test1 extends JFrame {
             }
         }
     }*/
+    
+    public void  createMenu(){
+        JMenuBar mb = new JMenuBar();
+        JMenu fileMenu = new JMenu("목록");
+        JMenu editMenu = new JMenu("기능");
 
-    public static void main(String[] args) {
-        new test1();
+
+        mb.add(fileMenu);
+        fileMenu.add(new JMenuItem("이수한 교과목 관리"));
+        fileMenu.add(new JMenuItem("수강중인 교과목 관리"));
+        fileMenu.add(new JMenuItem("졸업조건관리"));
+        fileMenu.add(new JMenuItem("졸업조회"));
+
+        mb.add(editMenu);
+        editMenu.add(new JMenuItem("등록"));
+        
+        editMenu.add(new JMenuItem("수정"));
+        editMenu.add(new JMenuItem("삭제"));
+        this.setJMenuBar(mb);
+    }
+    
+}
+public class App{
+    public static void main(String args[]){
+        new MyFrame();
     }
 }
